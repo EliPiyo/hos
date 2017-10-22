@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.9.4)
+add_definitions("-Wall -std=c++11")
+add_subdirectory(version)
+add_subdirectory(boot)
+add_executable(hos hos.cpp)
+target_link_libraries(hos version boot)
