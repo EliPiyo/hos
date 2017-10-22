@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "boot/boot.hpp"
+#include "executioner/executioner.hpp"
 #include "login_sequence/login_sequence.hpp"
 #include "version/version.hpp"
 
@@ -29,4 +30,9 @@ int main(int argc, char** argv) {
     while (!login->login("author")) {
         std::cerr << "permission denied." << std::endl;
     }
+
+    std::cout << TERMINAL_CLEAR;
+
+    auto executioner = std::make_shared<executioner::executioner>();
+    executioner->execution(CHAR_DELAY_MS);
 }
