@@ -10,6 +10,8 @@
 #include <string>
 #include <thread>
 
+#include "../util/slow_console.hpp"
+
 namespace version {
 
 const static std::string PROGRAM_NAME = "Hyper Operating System";
@@ -39,11 +41,8 @@ void version::show(std::chrono::milliseconds char_delay) {
     stream << COLOR_POSTFIX;
     auto str = buf.str();
 
-    for (auto ch : str) {
-        std::cout << ch;
-        std::cout.flush();
-        std::this_thread::sleep_for(char_delay);
-    }
+    util::slow_console console(char_delay);
+    console.print(str);
 
     auto delay = std::chrono::milliseconds(DELAY_MS);
     std::this_thread::sleep_for(delay);

@@ -10,6 +10,8 @@
 #include <string>
 #include <thread>
 
+#include "../util/slow_console.hpp"
+
 namespace boot {
 
 const static std::string COLOR_PREFIX = "\e[37m";
@@ -30,11 +32,8 @@ void boot::attach(std::string const device, std::string const mount_point,
     stream << COLOR_POSTFIX;
     auto str = buf.str();
 
-    for (auto ch : str) {
-        std::cout << ch;
-        std::cout.flush();
-        std::this_thread::sleep_for(char_delay);
-    }
+    util::slow_console console(char_delay);
+    console.print(str);
 
     auto delay = std::chrono::milliseconds(DELAY_MS);
     std::this_thread::sleep_for(delay);
